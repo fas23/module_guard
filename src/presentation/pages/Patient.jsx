@@ -35,7 +35,7 @@ const Patient = () => {
             </Col>
             <Col>
               <Form.Group className="mb-3" controlId="date">
-                <Form.Label>Fecha de Ingreso:</Form.Label>
+                <Form.Label>Fecha Ingreso:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={findPatient[0].fecha}
@@ -43,7 +43,7 @@ const Patient = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Motivo Consulta:</Form.Label>
+                <Form.Label>Consulta:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={findPatient[0].motivo}
