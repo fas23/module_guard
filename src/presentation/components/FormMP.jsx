@@ -4,7 +4,13 @@ import { Col, Row, Form, Button } from "react-bootstrap";
 import FormAnamnesis from "./FormAnamnesis";
 import { obtenerFecha, obtenerHora } from "../../utils/hora";
 
-const FormMP = ({ listDoctors, idPaciente, anamList, profession }) => {
+const FormMP = ({
+  listDoctors,
+  idPaciente,
+  anamList,
+  profession,
+  printRef,
+}) => {
   const [texto, setTexto] = useState("");
   const [inputAreaText, setInputAreaText] = useState("");
   //const [listAnamnesis, setListAnamnesis] = useState(anamList);
@@ -204,6 +210,7 @@ const FormMP = ({ listDoctors, idPaciente, anamList, profession }) => {
         doctor={doctor}
         idPac={idPaciente}
         profession={profession}
+        printRef={printRef}
       />
     </>
   );

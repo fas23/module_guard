@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Form, Row, Col, Tab, Tabs, Button } from "react-bootstrap";
 import FormMP from "./FormMP";
+import { useReactToPrint } from "react-to-print";
 
 const TabsPatient = ({ listPatient, idPaciente }) => {
   const list = listPatient.doctors;
   const anamList = listPatient.anamnesisList;
+  const printRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+  });
 
   return (
     <Col>
+      <Button variant="primary" className="mb-4" onClick={handlePrint}>
+        Imprimir
+      </Button>
       <Tabs
         defaultActiveKey="home"
         id="uncontrolled-tab-example"
@@ -69,6 +78,7 @@ const TabsPatient = ({ listPatient, idPaciente }) => {
             idPaciente={idPaciente}
             anamList={anamList}
             profession="doctor"
+            printRef={printRef}
           />
         </Tab>
 
@@ -81,6 +91,7 @@ const TabsPatient = ({ listPatient, idPaciente }) => {
             idPaciente={idPaciente}
             anamList={anamList}
             profession="enfermero"
+            printRef={printRef}
           />
         </Tab>
       </Tabs>
