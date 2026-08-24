@@ -12,7 +12,7 @@ const data = {
       email: "lgethen0@amazon.co.jp",
       gender: "Female",
       fecha: today,
-      motivo: "dolor abdominal",
+      motivo: "Consulta Medica",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const data = {
       email: "bjancik1@nhs.uk",
       gender: "Male",
       fecha: today,
-      motivo: "fiebre",
+      motivo: "Consulta Medica",
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ const data = {
       email: "tdregan2@about.me",
       gender: "Female",
       fecha: today,
-      motivo: "corte con amoladora",
+      motivo: "Consulta Medica",
     },
     {
       id: 4,
@@ -39,7 +39,7 @@ const data = {
       email: "eweiss3@europa.eu",
       gender: "Female",
       fecha: today,
-      motivo: "lumbalgia",
+      motivo: "Consulta Medica",
     },
     {
       id: 5,
@@ -48,7 +48,7 @@ const data = {
       email: "rhairyes4@usda.gov",
       gender: "Genderfluid",
       fecha: today,
-      motivo: "dolor brazo",
+      motivo: "Consulta Medica",
     },
     {
       id: 6,
@@ -57,7 +57,7 @@ const data = {
       email: "afarman5@google.co.jp",
       gender: "Female",
       fecha: today,
-      motivo: "caida de altura",
+      motivo: "Consulta Medica",
     },
     {
       id: 7,
@@ -66,7 +66,7 @@ const data = {
       email: "ostarsmore6@time.com",
       gender: "Male",
       fecha: today,
-      motivo: "caida de propia altura",
+      motivo: "Consulta Medica",
     },
     {
       id: 8,
@@ -75,7 +75,7 @@ const data = {
       email: "alockyear7@businesswire.com",
       gender: "Male",
       fecha: today,
-      motivo: "moto vs auto",
+      motivo: "Consulta Medica",
     },
     {
       id: 9,
@@ -84,7 +84,7 @@ const data = {
       email: "letherson8@dagondesign.com",
       gender: "Male",
       fecha: today,
-      motivo: "accidente vehicular",
+      motivo: "Consulta Medica",
     },
     {
       id: 10,
@@ -93,7 +93,7 @@ const data = {
       email: "lsneaker9@dedecms.com",
       gender: "Female",
       fecha: today,
-      motivo: "derrape de moto",
+      motivo: "Consulta Medica",
     },
   ],
   doctors: [

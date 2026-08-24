@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Form, Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import listPatient from "../../data/dataBase.js";
@@ -43,7 +43,7 @@ const Patient = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Consulta:</Form.Label>
+                <Form.Label>Motivo de Consulta:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={findPatient[0].motivo}

@@ -9,18 +9,21 @@ import Patient_list from "./presentation/pages/Patient_list.jsx";
 import Patient from "./presentation/pages/Patient.jsx";
 import NavBar from "./presentation/components/NavBar.jsx";
 import { Toaster } from "react-hot-toast";
+import { InterconsultaProvider } from "./context/InterconsultaContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <StrictMode>
-      <Toaster position="top-right" />
-      <Routes>
-        <Route path="/" element={<NavBar />}>
-          <Route index element={<Home />}></Route>
-          <Route path="/listado-paciente" element={<Patient_list />}></Route>
-          <Route path="/paciente/:id" element={<Patient />}></Route>
-        </Route>
-      </Routes>
-    </StrictMode>
-  </BrowserRouter>,
+  <StrictMode>
+    <InterconsultaProvider>
+      <BrowserRouter>
+        <Toaster position="top-right" />
+        <Routes>
+          <Route path="/" element={<NavBar />}>
+            <Route index element={<Home />}></Route>
+            <Route path="/listado-paciente" element={<Patient_list />}></Route>
+            <Route path="/paciente/:id" element={<Patient />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </InterconsultaProvider>
+  </StrictMode>,
 );

@@ -43,7 +43,7 @@ const FormAnamnesis = ({
                       <Form.Label>
                         {anam.profession === "doctor"
                           ? `Anamnesis : ${anam.ananmnesis}`
-                          : `Tratamiento : ${anam.ananmnesis}`}
+                          : `Novedades : ${anam.ananmnesis}`}
                         {/* Anamnesis : {anam.ananmnesis} */}
                       </Form.Label>
                     </Row>

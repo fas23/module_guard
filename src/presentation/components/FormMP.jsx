@@ -57,6 +57,9 @@ const FormMP = ({
     setTexto("");
     setClose(!close);
   };
+  const tam = listAnamnesis.filter(
+    (anam) => anam.idPaciente == idPaciente,
+  ).length;
 
   const handleAnamnesis = (e) => {
     e.preventDefault();
@@ -88,6 +91,57 @@ const FormMP = ({
 
   return (
     <>
+      {tam == 0 && (
+        <Form>
+          <Row>
+            {/* Doctor */}
+            <Col xs={12} md={8}>
+              <Form.Group className="mb-3" controlId="doctor">
+                <Form.Label>Doctor:</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ingrese Nombre y Apellido"
+                />
+              </Form.Group>
+            </Col>
+
+            {/* Matrícula */}
+            <Col xs={12} md={4}>
+              <Form.Group className="mb-3" controlId="matricula">
+                <Form.Label>Matrícula Profesional:</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Ingrese su Matrícula Profesional"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          {/* Motivo */}
+          <Row>
+            <Col xs={12}>
+              <Form.Group className="mb-3" controlId="motivo">
+                <Form.Label>Motivo de Consulta:</Form.Label>
+                <Form.Control as="textarea" rows={5} />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          {/* HEA */}
+          <Row>
+            <Col xs={12}>
+              <Form.Group className="mb-3" controlId="hea">
+                <Form.Label>HEA:</Form.Label>
+                <Form.Control as="textarea" rows={5} />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Button variant="primary" type="submit" className="mt-3">
+            Enviar
+          </Button>
+        </Form>
+      )}
       <Form onSubmit={handleSumit}>
         <Form.Group as={Row} className="mb-3" controlId="formMP">
           <Form.Label column sm={3}>
