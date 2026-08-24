@@ -43,7 +43,7 @@ const Patient = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Motivo de Consulta:</Form.Label>
+                <Form.Label>Motivo:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={findPatient[0].motivo}
