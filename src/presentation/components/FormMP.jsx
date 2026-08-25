@@ -95,11 +95,10 @@ const FormMP = ({
     <>
       <Form onSubmit={handleSumit}>
         <Form.Group as={Row} className="mb-3" controlId="formMP">
-          <Form.Label column sm={3}>
-            Ingrese Matrícula Profesional:
-          </Form.Label>
-
-          <Col sm={4}>
+          <Col xs={12} sm={4}>
+            <Form.Label>Ingrese Matrícula Profesional:</Form.Label>
+          </Col>
+          <Col xs={12} sm={5}>
             <Form.Control
               type="text"
               placeholder="MP"
@@ -108,7 +107,7 @@ const FormMP = ({
             />
           </Col>
 
-          <Col xs={12} sm={4} className="mt-2 mt-sm-0">
+          <Col xs={12} sm={3} className="mt-2 mt-sm-0">
             <Button
               variant="primary"
               type="submit"
@@ -175,7 +174,7 @@ const FormMP = ({
               </Col>
             </Row>
 
-            <Col xs={12} sm={4} className="mb-3">
+            <Col xs={12} sm={2} className="mb-3">
               <Button
                 variant="primary"
                 type="submit"
@@ -224,7 +223,7 @@ const FormMP = ({
                       onChange={(e) => setInputAreaText(e.target.value)}
                     />
                   </Form.Group>
-                  <Col xs={12} sm={4} className="mb-3">
+                  <Col xs={12} sm={2} className="mb-3">
                     <Button
                       variant="primary"
                       type="submit"

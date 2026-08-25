@@ -17,9 +17,11 @@ const TabsPatient = ({ listPatient, idPaciente }) => {
 
   return (
     <Col>
-      <Button variant="primary" className="mb-4" onClick={handlePrint}>
-        Imprimir
-      </Button>
+      <Col xs={12} sm={2} className="mb-4">
+        <Button variant="primary" className="w-100" onClick={handlePrint}>
+          Imprimir
+        </Button>
+      </Col>
       <Tabs
         defaultActiveKey="home"
         id="uncontrolled-tab-example"
@@ -129,21 +131,6 @@ const TabsPatient = ({ listPatient, idPaciente }) => {
         {/* tab ANAMNESIS */}
 
         <Tab eventKey="profile" title="ANAMNESIS">
-          {/* <Form>
-            <Form.Group className="mb-3" controlId="formAnamnesis">
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label>Mc:</Form.Label>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>HEA:</Form.Label>
-                  </Form.Group>
-                </Col>
-              </Row>
-            </Form.Group>
-          </Form> */}
-
           {/* formulario ingreso mp doctor */}
 
           <FormMP

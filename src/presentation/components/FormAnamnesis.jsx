@@ -4,9 +4,6 @@ import Accordion from "react-bootstrap/Accordion";
 import RegistroHospitalario from "../pages/RegistroHospitalario";
 
 const FormAnamnesis = ({ listAnamnesis, idPac, profession, printRef }) => {
-  console.log(listAnamnesis);
-  //const tam = listAnamnesis.filter((anam) => anam.idPaciente == idPac).length;
-
   return (
     <>
       <div style={{ display: "none" }}>

@@ -1,4 +1,6 @@
 import React from "react";
+import data from "../../data/dataBase";
+import { Row, Col } from "react-bootstrap";
 
 const RegistroHospitalario = ({ listAnamnesis, idPac }) => {
   const medicos = listAnamnesis.filter(
@@ -9,6 +11,8 @@ const RegistroHospitalario = ({ listAnamnesis, idPac }) => {
     (a) => a.idPaciente == idPac && a.profession === "enfermero",
   );
 
+  const patient = data.patients.find((p) => p.id == idPac);
+
   return (
     <>
       {/* PAGINA 1 */}
@@ -18,8 +22,16 @@ const RegistroHospitalario = ({ listAnamnesis, idPac }) => {
             <tr>
               <th colSpan="4">
                 <div className="encabezado">
-                  <h2>HOSPITAL XXXXX</h2>
+                  <h2>HOSPITAL HPS</h2>
                   <p>Historia Clínica Nº {idPac}</p>
+                  <Row>
+                    <Col>
+                      <p>Nombre: {patient.first_name}</p>
+                    </Col>
+                    <Col>
+                      <p>Apellido: {patient.last_name}</p>
+                    </Col>
+                  </Row>
                   <h3>EVOLUCIÓN MÉDICA</h3>
                 </div>
               </th>
@@ -64,8 +76,16 @@ const RegistroHospitalario = ({ listAnamnesis, idPac }) => {
             <tr>
               <th colSpan="4">
                 <div className="encabezado">
-                  <h2>HOSPITAL XXXXX</h2>
+                  <h2>HOSPITAL HPS</h2>
                   <p>Historia Clínica Nº {idPac}</p>
+                  <Row>
+                    <Col>
+                      <p>Nombre: {patient.first_name}</p>
+                    </Col>
+                    <Col>
+                      <p>Apellido: {patient.last_name}</p>
+                    </Col>
+                  </Row>
                   <h3>REGISTRO ENFERMERIA</h3>
                 </div>
               </th>
@@ -74,7 +94,7 @@ const RegistroHospitalario = ({ listAnamnesis, idPac }) => {
               <th>Fecha/Hora</th>
               <th>Profesional</th>
               <th>Especialidad</th>
-              <th>Tratamiento</th>
+              <th>Novedades</th>
             </tr>
           </thead>
 
