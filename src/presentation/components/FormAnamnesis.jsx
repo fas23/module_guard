@@ -3,13 +3,10 @@ import { Form, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import RegistroHospitalario from "../pages/RegistroHospitalario";
 
-const FormAnamnesis = ({
-  doctor,
-  listAnamnesis,
-  idPac,
-  profession,
-  printRef,
-}) => {
+const FormAnamnesis = ({ listAnamnesis, idPac, profession, printRef }) => {
+  console.log(listAnamnesis);
+  //const tam = listAnamnesis.filter((anam) => anam.idPaciente == idPac).length;
+
   return (
     <>
       <div style={{ display: "none" }}>
@@ -36,15 +33,18 @@ const FormAnamnesis = ({
                         {anam.profession === "doctor"
                           ? `Doctor/a : ${anam.name_doctor} ${anam.surname_doctor}`
                           : `Lic/a : ${anam.name_doctor} ${anam.surname_doctor}`}
-                        {/* Doctor/a : {anam.name_doctor} {anam.surname_doctor} */}
                         <br />
                         Especialidad : {anam.speciality}
                       </Form.Label>
+
+                      {index === 0 && (
+                        <Form.Label>Motivo : {anam.motivo}</Form.Label>
+                      )}
+
                       <Form.Label>
                         {anam.profession === "doctor"
                           ? `Anamnesis : ${anam.ananmnesis}`
                           : `Novedades : ${anam.ananmnesis}`}
-                        {/* Anamnesis : {anam.ananmnesis} */}
                       </Form.Label>
                     </Row>
                     <hr />
