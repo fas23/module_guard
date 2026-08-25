@@ -126,20 +126,20 @@ const data = {
     },
   ],
   anamnesisList: [
-    // {
-    //   id: 1,
-    //   idPaciente: 1,
-    //   idDoctor: 1,
-    //   name_doctor: "Roberto",
-    //   surname_doctor: "Arias",
-    //   profession: "doctor",
-    //   speciality: "Cirugía General",
-    //   ananmnesis: "dolor Abdominal",
-    //   today: today,
-    //   hour: hour,
-    //   motivo:
-    //     "Paciente con dolor abdominal intenso, se recomienda realizar estudios de imagen y laboratorio para descartar apendicitis.",
-    // },
+    {
+      id: 1,
+      idPaciente: 1,
+      idDoctor: 1,
+      name_doctor: "Roberto",
+      surname_doctor: "Arias",
+      profession: "doctor",
+      speciality: "Cirugía General",
+      ananmnesis:
+        "Paciente con dolor abdominal intenso, se recomienda realizar estudios de imagen y laboratorio para descartar apendicitis.",
+      today: today,
+      hour: hour,
+      motivo: "dolor Abdominal",
+    },
   ],
 };
 

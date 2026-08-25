@@ -96,8 +96,9 @@ const FormMP = ({
       <Form onSubmit={handleSumit}>
         <Form.Group as={Row} className="mb-3" controlId="formMP">
           <Form.Label column sm={3}>
-            Ingrese Matricula Profesional;
+            Ingrese Matrícula Profesional:
           </Form.Label>
+
           <Col sm={4}>
             <Form.Control
               type="text"
@@ -106,8 +107,14 @@ const FormMP = ({
               onChange={(e) => setTexto(e.target.value)}
             />
           </Col>
-          <Col>
-            <Button variant="primary" type="submit" disabled={!enableButton}>
+
+          <Col xs={12} sm={4} className="mt-2 mt-sm-0">
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={!enableButton}
+              className="w-100"
+            >
               Agregar
             </Button>
           </Col>
@@ -168,14 +175,16 @@ const FormMP = ({
               </Col>
             </Row>
 
-            <Button
-              variant="primary"
-              type="submit"
-              className="mb-3"
-              disabled={!enableButtonArea}
-            >
-              Guardar
-            </Button>
+            <Col xs={12} sm={4} className="mb-3">
+              <Button
+                variant="primary"
+                type="submit"
+                className="w-100"
+                disabled={!enableButtonArea}
+              >
+                Guardar
+              </Button>
+            </Col>
           </Form>
         </>
       ) : (
@@ -215,14 +224,16 @@ const FormMP = ({
                       onChange={(e) => setInputAreaText(e.target.value)}
                     />
                   </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="mb-4"
-                    disabled={!enableButtonArea}
-                  >
-                    Guardar
-                  </Button>
+                  <Col xs={12} sm={4} className="mb-3">
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="w-100"
+                      disabled={!enableButtonArea}
+                    >
+                      Guardar
+                    </Button>
+                  </Col>
                 </Form>
               </div>
             )}
