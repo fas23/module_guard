@@ -141,6 +141,125 @@ const data = {
       motivo: "dolor Abdominal",
     },
   ],
+  medicationsList: [
+    {
+      id: 1,
+      idPaciente: 1,
+      idDoctor: 1,
+      name_doctor: "Roberto",
+      surname_doctor: "Arias",
+      medication: "Propofol",
+      description: "Anestésico utilizado durante el procedimiento.",
+      today: today,
+      hour: hour,
+    },
+  ],
+  medications: [
+    {
+      id: 1,
+      nombre: "Propofol",
+    },
+    {
+      id: 2,
+      nombre: "Midazolam",
+    },
+    {
+      id: 3,
+      nombre: "Fentanilo",
+    },
+    {
+      id: 4,
+      nombre: "Morfina",
+    },
+    {
+      id: 5,
+      nombre: "Ketamina",
+    },
+    {
+      id: 6,
+      nombre: "Sevoflurano",
+    },
+    {
+      id: 7,
+      nombre: "Rocuronio",
+    },
+    {
+      id: 8,
+      nombre: "Succinilcolina",
+    },
+    {
+      id: 9,
+      nombre: "Bupivacaína",
+    },
+    {
+      id: 10,
+      nombre: "Lidocaína",
+    },
+    {
+      id: 11,
+      nombre: "Paracetamol",
+    },
+    {
+      id: 12,
+      nombre: "Ketorolaco",
+    },
+    {
+      id: 13,
+      nombre: "Metamizol",
+    },
+    {
+      id: 14,
+      nombre: "Ondansetrón",
+    },
+    {
+      id: 15,
+      nombre: "Metoclopramida",
+    },
+    {
+      id: 16,
+      nombre: "Cefazolina",
+    },
+    {
+      id: 17,
+      nombre: "Metronidazol",
+    },
+    {
+      id: 18,
+      nombre: "Ceftriaxona",
+    },
+    {
+      id: 19,
+      nombre: "Amoxicilina/ácido clavulánico",
+    },
+    {
+      id: 20,
+      nombre: "Piperacilina/tazobactam",
+    },
+    {
+      id: 21,
+      nombre: "Heparina",
+    },
+    {
+      id: 22,
+      nombre: "Enoxaparina",
+    },
+    {
+      id: 23,
+      nombre: "Adrenalina",
+    },
+    {
+      id: 24,
+      nombre: "Noradrenalina",
+    },
+    {
+      id: 25,
+      nombre: "Atropina",
+    },
+    {
+      id: 26,
+      nombre: "Efedrina",
+    },
+  ],
 };
 
 export default data;

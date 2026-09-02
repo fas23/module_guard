@@ -3,6 +3,7 @@ import { Form, Row, Col, Tab, Tabs, Button } from "react-bootstrap";
 import FormMP from "./FormMP";
 import { useReactToPrint } from "react-to-print";
 import { useInterconsultas } from "../../context/InterconsultaContext.jsx";
+import AutoComplete from "./AutoComplete.jsx";
 
 const TabsPatient = ({ listPatient, idPaciente }) => {
   const list = listPatient.doctors;
@@ -155,7 +156,7 @@ const TabsPatient = ({ listPatient, idPaciente }) => {
           />
         </Tab>
         <Tab eventKey="trat" title="TRATAMIENTO">
-          {/* formulario ingreso mp enfermero */}
+          <AutoComplete idPaciente={idPaciente} />
         </Tab>
       </Tabs>
     </Col>
