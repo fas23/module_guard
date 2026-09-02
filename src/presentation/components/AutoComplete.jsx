@@ -246,10 +246,7 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
       {/* ============================== */}
 
       <div className="mt-4">
-        <h4>
-          Medicamentos registrados{" "}
-          <Badge bg="primary">{medicamentosPaciente.length}</Badge>
-        </h4>
+        <h4>Medicamentos registrados</h4>
 
         {medicamentosPaciente.length === 0 ? (
           <Alert variant="secondary" className="mt-3">
