@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Form, ListGroup, Card, Button, Badge, Alert } from "react-bootstrap";
+import { Form, ListGroup, Card, Button, Alert } from "react-bootstrap";
 
 import data from "../../data/dataBase.js";
 import { obtenerFecha, obtenerHora } from "../../utils/hora";
 
 const STORAGE_KEY = "medicalData";
-
-const medicamentos = data.medications;
 
 export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
   // ==========================================
@@ -30,7 +28,15 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
   });
 
   // ==========================================
-  // FORMULARIO
+  // SIGNOS VITALES Y DIETA
+  // ==========================================
+
+  const [controlSignosVitales, setControlSignosVitales] = useState("");
+
+  const [dieta, setDieta] = useState("");
+
+  // ==========================================
+  // MEDICAMENTO
   // ==========================================
 
   const [busqueda, setBusqueda] = useState("");
@@ -40,6 +46,12 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
   const [medicamentoSeleccionado, setMedicamentoSeleccionado] = useState(null);
 
   const [descripcion, setDescripcion] = useState("");
+
+  // ==========================================
+  // MEDICAMENTOS DISPONIBLES
+  // ==========================================
+
+  const medicamentos = medicalData.medications || [];
 
   // ==========================================
   // GUARDAR CAMBIOS
@@ -58,20 +70,24 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
 
     setBusqueda(valor);
 
+    setMedicamentoSeleccionado(null);
+
     if (!valor.trim()) {
       setResultados([]);
       return;
     }
 
+    const texto = valor.toLowerCase().trim();
+
     const filtrados = medicamentos.filter((medicamento) =>
-      medicamento.nombre.toLowerCase().includes(valor.toLowerCase()),
+      medicamento.nombre.toLowerCase().includes(texto),
     );
 
     setResultados(filtrados);
   };
 
   // ==========================================
-  // SELECCIONAR
+  // SELECCIONAR MEDICAMENTO
   // ==========================================
 
   const handleSelect = (medicamento) => {
@@ -85,7 +101,41 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
   };
 
   // ==========================================
-  // AGREGAR
+  // AGREGAR MEDICAMENTO MANUAL
+  // ==========================================
+
+  const handleAgregarManual = () => {
+    const nombre = busqueda.trim();
+
+    if (!nombre) return;
+
+    const medicamentoExistente = medicamentos.find(
+      (medicamento) =>
+        medicamento.nombre.toLowerCase() === nombre.toLowerCase(),
+    );
+
+    if (medicamentoExistente) {
+      handleSelect(medicamentoExistente);
+      return;
+    }
+
+    const medicamentoManual = {
+      id: crypto.randomUUID(),
+      nombre,
+      manual: true,
+    };
+
+    setMedicamentoSeleccionado(medicamentoManual);
+
+    setBusqueda(nombre);
+
+    setResultados([]);
+
+    setDescripcion("");
+  };
+
+  // ==========================================
+  // AGREGAR MEDICAMENTO AL PACIENTE
   // ==========================================
 
   const handleAgregar = () => {
@@ -99,7 +149,10 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
       return;
     }
 
-    // Buscar si ya existe para este paciente
+    // ========================================
+    // VERIFICAR SI YA EXISTE
+    // ========================================
+
     const existe = medicalData.medicationsList.some(
       (item) =>
         item.idPaciente === idPaciente &&
@@ -112,8 +165,15 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
       return;
     }
 
-    // Buscar doctor
+    // ========================================
+    // BUSCAR DOCTOR
+    // ========================================
+
     const doctor = medicalData.doctors.find((item) => item.id === idDoctor);
+
+    // ========================================
+    // CREAR REGISTRO
+    // ========================================
 
     const nuevoMedicamento = {
       id: crypto.randomUUID(),
@@ -132,18 +192,38 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
 
       description: descripcion.trim(),
 
+      // NUEVOS CAMPOS
+      controlSignosVitales: controlSignosVitales.trim(),
+
+      dieta: dieta.trim(),
+
       today: obtenerFecha(),
 
       hour: obtenerHora(),
     };
 
+    // ========================================
+    // GUARDAR EN medicationsList
+    // ========================================
+
     setMedicalData((prev) => ({
       ...prev,
 
       medicationsList: [...prev.medicationsList, nuevoMedicamento],
+
+      // Si el medicamento es manual,
+      // también lo agregamos al catálogo
+      ...(medicamentoSeleccionado.manual
+        ? {
+            medications: [...(prev.medications || []), medicamentoSeleccionado],
+          }
+        : {}),
     }));
 
-    // Limpiar formulario
+    // ========================================
+    // LIMPIAR FORMULARIO
+    // ========================================
+
     setBusqueda("");
 
     setResultados([]);
@@ -151,18 +231,10 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
     setMedicamentoSeleccionado(null);
 
     setDescripcion("");
-  };
 
-  // ==========================================
-  // ELIMINAR
-  // ==========================================
+    setControlSignosVitales("");
 
-  const handleEliminar = (id) => {
-    setMedicalData((prev) => ({
-      ...prev,
-
-      medicationsList: prev.medicationsList.filter((item) => item.id !== id),
-    }));
+    setDieta("");
   };
 
   // ==========================================
@@ -172,7 +244,7 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
   const medicamentosPaciente = medicalData.medicationsList.filter(
     (item) => item.idPaciente == idPaciente,
   );
-  console.log(medicamentosPaciente);
+
   // ==========================================
   // RENDER
   // ==========================================
@@ -181,11 +253,42 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
     <div className="container py-4">
       <h2 className="mb-4">Medicamentos del paciente</h2>
 
-      {/* ============================== */}
-      {/* BUSCADOR */}
-      {/* ============================== */}
+      {/* ====================================== */}
+      {/* CONTROL DE SIGNOS VITALES */}
+      {/* ====================================== */}
 
-      <div className="position-relative" style={{ maxWidth: "500px" }}>
+      <Form.Group className="mb-3">
+        <Form.Label>Control de Signos Vitales</Form.Label>
+
+        <Form.Control
+          type="text"
+          placeholder="Ingrese control de signos vitales..."
+          value={controlSignosVitales}
+          onChange={(e) => setControlSignosVitales(e.target.value)}
+        />
+      </Form.Group>
+
+      {/* ====================================== */}
+      {/* DIETA */}
+      {/* ====================================== */}
+
+      <Form.Group className="mb-4">
+        <Form.Label>Dieta</Form.Label>
+
+        <Form.Control
+          as="textarea"
+          rows={5}
+          placeholder="Ingrese la dieta..."
+          value={dieta}
+          onChange={(e) => setDieta(e.target.value)}
+        />
+      </Form.Group>
+
+      {/* ====================================== */}
+      {/* BUSCADOR */}
+      {/* ====================================== */}
+
+      <div className="position-relative" style={{ maxWidth: "700px" }}>
         <Form.Label>Medicamento</Form.Label>
 
         <Form.Control
@@ -195,30 +298,44 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
           onChange={handleSearch}
         />
 
-        {resultados.length > 0 && (
+        {/* AUTOCOMPLETE */}
+
+        {busqueda.trim() !== "" && (
           <ListGroup
             className="position-absolute w-100"
-            style={{ zIndex: 1000 }}
+            style={{
+              zIndex: 1000,
+            }}
           >
-            {resultados.map((medicamento) => (
+            {resultados.length > 0 ? (
+              resultados.map((medicamento) => (
+                <ListGroup.Item
+                  key={medicamento.id}
+                  action
+                  onClick={() => handleSelect(medicamento)}
+                >
+                  {medicamento.nombre}
+                </ListGroup.Item>
+              ))
+            ) : (
               <ListGroup.Item
-                key={medicamento.id}
                 action
-                onClick={() => handleSelect(medicamento)}
+                variant="success"
+                onClick={handleAgregarManual}
               >
-                {medicamento.nombre}
+                + Agregar "{busqueda}" manualmente
               </ListGroup.Item>
-            ))}
+            )}
           </ListGroup>
         )}
       </div>
 
-      {/* ============================== */}
-      {/* DESCRIPCIÓN */}
-      {/* ============================== */}
+      {/* ====================================== */}
+      {/* DESCRIPCIÓN DEL MEDICAMENTO */}
+      {/* ====================================== */}
 
       {medicamentoSeleccionado && (
-        <Card className="mt-3" style={{ maxWidth: "500px" }}>
+        <Card className="mt-3" style={{ maxWidth: "700px" }}>
           <Card.Body>
             <Card.Title>{medicamentoSeleccionado.nombre}</Card.Title>
 
@@ -227,7 +344,7 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
 
               <Form.Control
                 as="textarea"
-                rows={4}
+                rows={3}
                 placeholder="Ingrese una descripción..."
                 value={descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
@@ -241,46 +358,81 @@ export default function AutoComplete({ idPaciente = 1, idDoctor = 1 }) {
         </Card>
       )}
 
-      {/* ============================== */}
-      {/* MEDICAMENTOS DEL PACIENTE */}
-      {/* ============================== */}
+      {/* ====================================== */}
+      {/* MEDICAMENTOS REGISTRADOS */}
+      {/* ====================================== */}
 
       <div className="mt-4">
-        <h4>Medicamentos registrados</h4>
+        <h4 className="mb-3">Medicamentos registrados</h4>
 
         {medicamentosPaciente.length === 0 ? (
           <Alert variant="secondary" className="mt-3">
             No hay medicamentos registrados para este paciente.
           </Alert>
         ) : (
-          medicamentosPaciente.map((medicamento) => (
-            <Card className="mb-3" key={medicamento.id}>
-              <Card.Body>
-                <div className="d-flex justify-content-between">
+          <div
+            className="border rounded"
+            style={{
+              maxWidth: "1000px",
+            }}
+          >
+            {medicamentosPaciente.map((medicamento, index) => (
+              <div
+                key={medicamento.id}
+                className={`px-3 py-2 ${
+                  index !== medicamentosPaciente.length - 1
+                    ? "border-bottom"
+                    : ""
+                }`}
+              >
+                {/* SIGNOS VITALES */}
+
+                {medicamento.controlSignosVitales && (
                   <div>
-                    <Card.Title>{medicamento.medication}</Card.Title>
-
-                    <Card.Text>{medicamento.description}</Card.Text>
-
                     <small className="text-muted">
-                      Registrado por: {medicamento.name_doctor}{" "}
-                      {medicamento.surname_doctor}
-                      <br />
-                      Fecha: {medicamento.today} {medicamento.hour}
+                      Signos vitales: {medicamento.controlSignosVitales}
                     </small>
                   </div>
+                )}
 
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
-                    onClick={() => handleEliminar(medicamento.id)}
+                {/* DIETA */}
+
+                {medicamento.dieta && (
+                  <div>
+                    <small className="text-muted">
+                      Dieta: {medicamento.dieta}
+                    </small>
+                  </div>
+                )}
+
+                {/* MEDICAMENTO + DESCRIPCIÓN */}
+
+                <div className="d-flex align-items-center">
+                  <strong
+                    className="me-2"
+                    style={{
+                      whiteSpace: "nowrap",
+                    }}
                   >
-                    Eliminar
-                  </Button>
+                    {medicamento.medication}
+                  </strong>
+
+                  <span className="text-muted me-2">—</span>
+
+                  <span className="text-muted">{medicamento.description}</span>
                 </div>
-              </Card.Body>
-            </Card>
-          ))
+
+                {/* INFORMACIÓN */}
+
+                <small className="text-muted">
+                  Registrado por: {medicamento.name_doctor}{" "}
+                  {medicamento.surname_doctor}
+                  {" | "}
+                  {medicamento.today} {medicamento.hour}
+                </small>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

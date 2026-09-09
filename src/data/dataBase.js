@@ -154,6 +154,38 @@ const data = {
       hour: hour,
     },
   ],
+  /* medicationsList2:[{
+  id: "abc123",
+  idPaciente: 1,
+  idDoctor: 1,
+
+  name_doctor: "Juan",
+  surname_doctor: "Perez",
+
+  controlSignosVitales: "TA 120/80 - FC 72",
+  dieta: "Hiposódica",
+
+  today: "09/09/2026",
+  hour: "09:30",
+
+  medicamentos: [
+    {
+      id: "med1",
+      medicationId: "10",
+      medication: "Paracetamol 500 mg",
+      description: "1 comprimido cada 8 horas"
+    },
+    {
+      id: "med2",
+      medicationId: "20",
+      medication: "Amoxicilina 500 mg",
+      description: "1 comprimido cada 12 horas"
+    }
+  ]
+},
+],
+ */
+
   medications: [
     {
       id: 1,
