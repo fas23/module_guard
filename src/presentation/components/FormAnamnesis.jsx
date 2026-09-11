@@ -24,7 +24,7 @@ const FormAnamnesis = ({ listAnamnesis, idPac, profession, printRef }) => {
                 .map((anam, index) => (
                   <React.Fragment key={`${anam.id}-${index}`}>
                     <Row>
-                      <Form.Label>
+                      {/* <Form.Label>
                         Fecha : {`${anam.today} ${anam.hour}`}
                         <br />
                         {anam.profession === "doctor"
@@ -32,9 +32,9 @@ const FormAnamnesis = ({ listAnamnesis, idPac, profession, printRef }) => {
                           : `Lic/a : ${anam.name_doctor} ${anam.surname_doctor}`}
                         <br />
                         Especialidad : {anam.speciality}
-                      </Form.Label>
+                      </Form.Label> */}
 
-                      {index === 0 && (
+                      {index === 0 && anam.profession === "doctor" && (
                         <Form.Label>Motivo : {anam.motivo}</Form.Label>
                       )}
 
@@ -43,6 +43,15 @@ const FormAnamnesis = ({ listAnamnesis, idPac, profession, printRef }) => {
                           ? `Anamnesis : ${anam.ananmnesis}`
                           : `Novedades : ${anam.ananmnesis}`}
                       </Form.Label>
+
+                      <small className="text-muted">
+                        Registrado por:{" "}
+                        {anam.profession === "doctor"
+                          ? `Doctor/a : ${anam.name_doctor} ${anam.surname_doctor}`
+                          : `Lic/a : ${anam.name_doctor} ${anam.surname_doctor}`}
+                        {" | "} {anam.speciality} {" | "}
+                        {anam.today} {anam.hour}
+                      </small>
                     </Row>
                     <hr />
                   </React.Fragment>
